@@ -1,0 +1,112 @@
+﻿<Window x:Class="color_mixer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:color_mixer"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="label" TargetType="Label">
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontStyle" Value="Normal"/>
+        </Style>
+        <Style x:Key="slider" TargetType="Slider">
+            <Setter Property="Maximum" Value="255"/>
+            <Setter Property="Width" Value="500"/>
+            <Setter Property="Margin" Value="16"/>
+        </Style>
+        <Style x:Key="border" TargetType="Border">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Width" Value="530"/>
+            <Setter Property="Height" Value="30"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <DockPanel LastChildFill="False">
+                <!--Name Color-->
+                <StackPanel>
+                    <Label Content="Alpha: " Style="{StaticResource label}"/>
+                    <Label Content="Red: " Style="{StaticResource label}"/>
+                    <Label Content="Green: " Style="{StaticResource label}"/>
+                    <Label Content="Blue: " Style="{StaticResource label}"/>
+                </StackPanel>
+
+                <!--Number Color-->
+                <StackPanel>
+                    <Label Content="255" Style="{StaticResource label}"/>
+                    <Label Content="255" Style="{StaticResource label}"/>
+                    <Label Content="255" Style="{StaticResource label}"/>
+                    <Label Content="255" Style="{StaticResource label}"/>
+                </StackPanel>
+
+                <!--Slider for change Color number-->
+                <StackPanel>
+                    <Slider Style="{StaticResource slider}"/>
+                    <Slider Style="{StaticResource slider}"/>
+                    <Slider Style="{StaticResource slider}"/>
+                    <Slider Style="{StaticResource slider}"/>
+                </StackPanel>
+                <!--Border for output result-->
+                <Border Width="105">
+                    <Border.Background>
+                        <SolidColorBrush Color="Yellow"></SolidColorBrush>
+                    </Border.Background>
+                </Border>
+            </DockPanel>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <DockPanel LastChildFill="False">
+                <Button Content="Add" Margin="5 0 0 0" Width="150"/>
+                <Button Content="Delete" Margin="5 0 0 0" Width="150"/>
+            </DockPanel>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <DockPanel LastChildFill="False">
+                <!--Show number argb-->
+                <StackPanel>
+                    <Label Style="{StaticResource label}" Content="#FF480000"/>
+                    <Label Style="{StaticResource label}" Content="#FF480000"/>
+                    <Label Style="{StaticResource label}" Content="#FF480000"/>
+                    <Label Style="{StaticResource label}" Content="#FF480000"/>
+                </StackPanel>
+                <!--Border for output result-->
+                <StackPanel>
+                    <!--First-->
+                    <Border Style="{StaticResource border}">
+                        <Border.Background>
+                            <SolidColorBrush Color="Fuchsia"></SolidColorBrush>
+                        </Border.Background>
+                    </Border>
+                    <!--Second-->
+                    <Border Style="{StaticResource border}">
+                        <Border.Background>
+                            <SolidColorBrush Color="Fuchsia"></SolidColorBrush>
+                        </Border.Background>
+                    </Border>
+                    <!--Third-->
+                    <Border Style="{StaticResource border}">
+                        <Border.Background>
+                            <SolidColorBrush Color="Fuchsia"></SolidColorBrush>
+                        </Border.Background>
+                    </Border>
+                    <!--Four-->
+                    <Border Style="{StaticResource border}">
+                        <Border.Background>
+                            <SolidColorBrush Color="Fuchsia"></SolidColorBrush>
+                        </Border.Background>
+                    </Border>
+                </StackPanel>
+            </DockPanel>
+        </Grid>
+    </Grid>
+</Window>
