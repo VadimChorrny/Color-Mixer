@@ -21,6 +21,7 @@
             <Setter Property="Width" Value="530"/>
             <Setter Property="Height" Value="30"/>
         </Style>
+
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -105,6 +106,13 @@
                             <SolidColorBrush Color="Fuchsia"></SolidColorBrush>
                         </Border.Background>
                     </Border>
+                </StackPanel>
+                <!--Copy buttons-->
+                <StackPanel>
+                    <Button Width="80" Margin="9" Content="Copy"/>
+                    <Button Width="80" Margin="9" Content="Copy"/>
+                    <Button Width="80" Margin="9" Content="Copy"/>
+                    <Button Width="80" Margin="9" Content="Copy"/>
                 </StackPanel>
             </DockPanel>
         </Grid>
