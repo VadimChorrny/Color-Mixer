@@ -1,4 +1,5 @@
-﻿using System;
+﻿using color_mixer.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace color_mixer
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainWindowModel viewModel = new MainWindowModel();
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = viewModel;
         }
+
     }
 }

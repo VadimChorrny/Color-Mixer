@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:color_mixer"
+        xmlns:local="clr-namespace:color_mixer" xmlns:viewmodel="clr-namespace:color_mixer.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainWindowModel}"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
@@ -25,96 +25,69 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="30"/>
-            <RowDefinition/>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="0.2*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
 
-        <Grid Grid.Row="0">
-            <DockPanel LastChildFill="False">
-                <!--Name Color-->
-                <StackPanel>
-                    <Label Content="Alpha: " Style="{StaticResource label}"/>
-                    <Label Content="Red: " Style="{StaticResource label}"/>
-                    <Label Content="Green: " Style="{StaticResource label}"/>
-                    <Label Content="Blue: " Style="{StaticResource label}"/>
-                </StackPanel>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="55"></ColumnDefinition>
+                <ColumnDefinition Width="55"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="55"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Grid.Row="0">Alpha:</Label>
+            <TextBlock  Margin="0,6,0,0" Grid.Row="0" Grid.Column="1" Text="{Binding SelectedColors.First, Mode=OneWay}"/>
+            <Label Grid.Column="0" Grid.Row="1">Red:</Label>
+            <TextBlock Margin="0,6,0,0" Grid.Column="1" Grid.Row="1" Text="{Binding SelectedColors.Second, Mode=OneWay}"/>
+            <Label Grid.Column="0" Grid.Row="2" >Green:</Label>
+            <TextBlock Margin="0,6,0,0" Grid.Row="2" Grid.Column="1" Text="{Binding SelectedColors.Third, Mode=OneWay}"/>
+            <Label Grid.Column="0" Grid.Row="3" >Blue:</Label>
+            <TextBlock Margin="0,6,0,0" Grid.Row="3" Grid.Column="1" Text="{Binding SelectedColors.Four, Mode=OneWay}"/>
+            <Slider Grid.Row="0" Grid.Column="2" Margin="0,5,10,0" Maximum="255" Minimum="1" Value="{Binding SelectedColors.First, Mode=TwoWay}">
 
-                <!--Number Color-->
-                <StackPanel>
-                    <Label Content="255" Style="{StaticResource label}"/>
-                    <Label Content="255" Style="{StaticResource label}"/>
-                    <Label Content="255" Style="{StaticResource label}"/>
-                    <Label Content="255" Style="{StaticResource label}"/>
-                </StackPanel>
-
-                <!--Slider for change Color number-->
-                <StackPanel>
-                    <Slider Style="{StaticResource slider}"/>
-                    <Slider Style="{StaticResource slider}"/>
-                    <Slider Style="{StaticResource slider}"/>
-                    <Slider Style="{StaticResource slider}"/>
-                </StackPanel>
-                <!--Border for output result-->
-                <Border Width="105">
-                    <Border.Background>
-                        <SolidColorBrush Color="Yellow"></SolidColorBrush>
-                    </Border.Background>
-                </Border>
-            </DockPanel>
+            </Slider>
+            <Slider Grid.Row="1" Grid.Column="2" Margin="0,5,10,0" Value="{Binding SelectedColors.Second, Mode=TwoWay}" Minimum="1" Maximum="255" SmallChange="1"></Slider>
+            <Slider Grid.Row="2" Grid.Column="2" Margin="0,5,10,0" Value="{Binding SelectedColors.Third, Mode=TwoWay}" Minimum="1" Maximum="255" SmallChange="1"></Slider>
+            <Slider Grid.Row="3" Grid.Column="2" Margin="0,5,10,0" Value="{Binding SelectedColors.Four, Mode=TwoWay}" Maximum="255" Minimum="1" SmallChange="1"></Slider>
+            <Border Grid.Column="3"  Grid.Row="0" Grid.RowSpan="4">
+                <Border.Background>
+                    <SolidColorBrush Color="{Binding Path=SelectedColors.MyColor}"></SolidColorBrush>
+                </Border.Background>
+            </Border>
         </Grid>
-
         <Grid Grid.Row="1">
-            <DockPanel LastChildFill="False">
-                <Button Content="Add" Margin="5 0 0 0" Width="150"/>
-                <Button Content="Delete" Margin="5 0 0 0" Width="150"/>
-            </DockPanel>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition ></ColumnDefinition>
+                <ColumnDefinition ></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Command="{Binding CopyColorCommand}" FontFamily="Bebas" >Add</Button>
+            <Button Grid.Column="1" Command="{Binding RemoveColorCommand}">Remove</Button>
         </Grid>
-
-        <Grid Grid.Row="2">
-            <DockPanel LastChildFill="False">
-                <!--Show number argb-->
-                <StackPanel>
-                    <Label Style="{StaticResource label}" Content="#FF480000"/>
-                    <Label Style="{StaticResource label}" Content="#FF480000"/>
-                    <Label Style="{StaticResource label}" Content="#FF480000"/>
-                    <Label Style="{StaticResource label}" Content="#FF480000"/>
-                </StackPanel>
-                <!--Border for output result-->
-                <StackPanel>
-                    <!--First-->
-                    <Border Style="{StaticResource border}">
-                        <Border.Background>
-                            <SolidColorBrush Color="Fuchsia"></SolidColorBrush>
-                        </Border.Background>
-                    </Border>
-                    <!--Second-->
-                    <Border Style="{StaticResource border}">
-                        <Border.Background>
-                            <SolidColorBrush Color="Fuchsia"></SolidColorBrush>
-                        </Border.Background>
-                    </Border>
-                    <!--Third-->
-                    <Border Style="{StaticResource border}">
-                        <Border.Background>
-                            <SolidColorBrush Color="Fuchsia"></SolidColorBrush>
-                        </Border.Background>
-                    </Border>
-                    <!--Four-->
-                    <Border Style="{StaticResource border}">
-                        <Border.Background>
-                            <SolidColorBrush Color="Fuchsia"></SolidColorBrush>
-                        </Border.Background>
-                    </Border>
-                </StackPanel>
-                <!--Copy buttons-->
-                <StackPanel>
-                    <Button Width="80" Margin="9" Content="Copy"/>
-                    <Button Width="80" Margin="9" Content="Copy"/>
-                    <Button Width="80" Margin="9" Content="Copy"/>
-                    <Button Width="80" Margin="9" Content="Copy"/>
-                </StackPanel>
-            </DockPanel>
-        </Grid>
+        <ListBox Grid.Row="2" Name="ColorsListBox" ItemsSource="{Binding Colors}" SelectedItem="{Binding Path=SelectedColors, Mode=TwoWay}" >
+            <!--<ListBox.ItemTemplate>
+                <ListBoxItem>Fefe</ListBoxItem>
+            </ListBox.ItemTemplate>-->
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <Border Width="100" Height="25" >
+                            <Border.Background>
+                                <SolidColorBrush Color="{Binding Path=SelectedColors}"></SolidColorBrush>
+                            </Border.Background>
+                        </Border>
+                        <TextBlock FontSize="16" Text="# fffff" Margin="5" HorizontalAlignment="Center" />
+                        <!--<TextBlock FontSize="16" Text="{Binding Path=Company}" HorizontalAlignment="Center" />-->
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>
